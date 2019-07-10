@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Gestor de Tarefas</string>
+    <string name="txt_data">Data:</string>
+    <string name="txt_descricao">Descrição:</string>
+    <string name="txt_nome">Nome:</string>
+    <string name="txt_inserir">Inserir Tarefa</string>
+    <string name="title_activity_list">Lista de Tarefas</string>
+</resources>

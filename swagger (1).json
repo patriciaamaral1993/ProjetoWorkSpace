@@ -1,0 +1,316 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Aplicação que vai gerir tarefas e respectivos proprietários segundo uma base de dados .",
+    "version": "1.0.0",
+    "title": "Work Space",
+    "contact": {
+      "email": "patricia.art.amaral@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "Tarefa",
+      "description": "Tudo sobre as suas tarefas",
+      "externalDocs": {
+        "description": "Descubra mais",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "store",
+      "description": "Tenha acesso às suas tarefas e dos seus colaboradores."
+    },
+    {
+      "name": "user",
+      "description": "As tarefas e os seus proprietarios.",
+      "externalDocs": {
+        "description": "Saiba mais sobre nós.",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/Tarefa": {
+      "post": {
+        "tags": [
+          "Tarefa"
+        ],
+        "summary": "É permitido ao proprietário adicionar uma tarefa a realizar.",
+        "description": "",
+        "operationId": "addTarefa",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Permite adicionar uma tarefa a concretizar.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tarefa"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Tarefa adicionada."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tarefa"
+        ],
+        "summary": "É permitido ao proprietátio editar uma tarefa a realizar.",
+        "description": "",
+        "operationId": "updateTarefa",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Permite editar uma tarefa a realizar.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Tarefa"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Tarefa adicionada com sucesso."
+          },
+          "422": {
+            "description": "Erros nos parametros inseridos."
+          },
+          "500": {
+            "description": "Não é possível inserir a tarefa pretendida."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tarefa"
+        ],
+        "summary": "É permitido ao proprietário apagar uma tarefa a realizar.",
+        "description": "",
+        "operationId": "deleteTarefa",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "TarefaId",
+            "in": "path",
+            "description": "Permite apagar uma tarefa a realizar.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": "Erros nos parametros inseridos."
+          },
+          "500": {
+            "description": "Não é possível apagar a tarefa."
+          }
+        }
+      }
+    },
+    "/Tarefa/{TarefaId}": {
+      "get": {
+        "tags": [
+          "Tarefa"
+        ],
+        "summary": "Pesquisar tarefa por ID",
+        "description": "Permite ao utilizador pesquisar uma tarefa a realizar apartir do ID.",
+        "operationId": "getTarefaById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "TarefaId",
+            "in": "path",
+            "description": "ID da tarefa foi retomado.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A tarefa foi devolvido com sucesso"
+          },
+          "422": {
+            "description": "Erros nos parametros."
+          },
+          "500": {
+            "description": "Não é possível apagar a tarefa."
+          }
+        }
+      }
+    },
+    "/Proprietarios/{ProprietariosId}/": {
+      "post": {
+        "tags": [
+          "Proprietarios"
+        ],
+        "summary": "É permitido adicionar um novo proprietário.",
+        "description": "",
+        "operationId": "addProprietarios",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Permite adicionar um novo proprietário.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Proprietarios"
+            }
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": "Erros nos parametros pedidos."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Proprietarios"
+        ],
+        "summary": "É permitido editar informação de um proprietário.",
+        "description": "",
+        "operationId": "updateProprietarios",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Permite editar informações de proprietários.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Proprietarios"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operação concluída com sucesso."
+          },
+          "422": {
+            "description": "Proprietário com erros nos parametros pedidos."
+          },
+          "501": {
+            "description": "Não é possível mostrar os dados do Proprietario pretendido."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Proprietarios"
+        ],
+        "summary": "É permitido apagar um proprietário.",
+        "description": "",
+        "operationId": "deleteProprietarios",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "TarefasId",
+            "in": "path",
+            "description": "Permite apagar um proprietario.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": "Erros nos parametros pedidos"
+          },
+          "501": {
+            "description": "Proprietário não encontrado"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Proprietarios"
+        ],
+        "summary": "Pesquisar proprietários por ID",
+        "description": "Permite ao utilizador pesquisar um proprietário apartir do ID.",
+        "operationId": "getProprietariosById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ProprietariosId",
+            "in": "path",
+            "description": "ID do proprietário foi retomado.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Operação concluída com sucesso."
+          },
+          "422": {
+            "description": "Erros nos parametros pedidos"
+          },
+          "500": {
+            "description": "Proprietário não encontrado"
+          }
+        }
+      }
+    }
+  }
+}
